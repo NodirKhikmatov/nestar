@@ -6,10 +6,13 @@ import { ConfigModule } from '@nestjs/config';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver } from '@nestjs/apollo';
 import { AppResolver } from './app.resolver';
+<<<<<<< HEAD
 import { ComponentsModule } from './components/components.module';
 import { DatabaseModule } from './database/database.module';
 import { T } from './libs/types/common';
 import { SocketModule } from './socket/socket.module';
+=======
+>>>>>>> 0886ba8 (feat: integration GraphQLModule and build first GraphQL query API)
 
 @Module({
 	imports: [
@@ -19,6 +22,7 @@ import { SocketModule } from './socket/socket.module';
 			playground: true,
 			uploads: false,
 			autoSchemaFile: true,
+<<<<<<< HEAD
 			formatError: (error: T) => {
 				const graphQLFormattedError = {
 					code: error?.extensions.code,
@@ -32,6 +36,9 @@ import { SocketModule } from './socket/socket.module';
 		ComponentsModule,
 		DatabaseModule,
 		SocketModule,
+=======
+		}),
+>>>>>>> 0886ba8 (feat: integration GraphQLModule and build first GraphQL query API)
 	],
 	controllers: [AppController],
 	providers: [AppService, AppResolver],

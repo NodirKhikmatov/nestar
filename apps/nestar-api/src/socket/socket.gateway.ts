@@ -133,5 +133,5 @@ if(this.messageList.length > 5) this.messageList.splice(0, this.messageList.leng
 /*
 client only client
 brodcast except client 
-emit al clients
+emit all
 */
