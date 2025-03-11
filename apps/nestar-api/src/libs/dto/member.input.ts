@@ -27,6 +27,7 @@ export class MemberInput {
 	@Field(() => MemberAuthType, { nullable: true })
 	memberAuthType?: MemberAuthType;
 }
+
 @InputType()
 export class LoginInput {
 	@IsNotEmpty()
@@ -38,4 +39,6 @@ export class LoginInput {
 	@Length(5, 12)
 	@Field(() => String)
 	memberPassword: string;
+
+
 }
