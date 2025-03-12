@@ -5,6 +5,7 @@ export enum Message {
 	CREATE_FAILED = 'create is failed',
 	UPDATE_FAILED = 'update is failed',
 
+	USED_MEMBER_NICK_OR_PHONE = 'Already used member nick or phone',
 	NO_MEMBER_NICK = 'No member with that member nick!',
 	TOKEN_CREATION_FAILED = 'Token creation error',
 	NO_NUMBER_NICK = 'you are inserting already used nick or phone!',
