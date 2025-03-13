@@ -13,7 +13,6 @@ export class LoggingInterceptor implements NestInterceptor {
 
 		if (requestType === 'http') {
 			/* Develop if needed */
-			return next.handle();
 		} else if (requestType === 'graphql') {
 			/* (1) Print Request */
 			const gqlContext = GqlExecutionContext.create(context);
@@ -30,9 +29,6 @@ export class LoggingInterceptor implements NestInterceptor {
 				}),
 			);
 		}
-
-		// Ensure an Observable is returned for all cases to fix TS2366
-		return next.handle();
 	}
 
 	// private stringify(data: any): string {
