@@ -1,12 +1,14 @@
 import { Resolver, Mutation, Query, Args } from '@nestjs/graphql';
 import { MemberService } from './member.service';
-import { InternalServerErrorException } from '@nestjs/common';
+import { InternalServerErrorException, UseGuards } from '@nestjs/common';
 import { MemberInput, LoginInput } from '../../libs/dto/member.input';
 import { Member } from '../../libs/dto/member';
-import { UseGuards } from '@nestjs/common';
 import { AuthGuard } from '../auth/guards/auth.guard';
 import { AuthMember } from '../auth/decorators/authMember.decorator';
 import { ObjectId } from 'bson';
+import { Roles } from '../auth/decorators/roles.decorator';
+import { MemberType } from '../../libs/enums/member.enum';
+import { RolesGuard } from '../auth/guards/roles.guard';
 
 @Resolver()
 export class MemberResolver {
@@ -46,11 +48,21 @@ export class MemberResolver {
 	}
 
 	@UseGuards(AuthGuard)
-	@Mutation(() => String)
+	@Query(() => String)
 	public async checkAuth(@AuthMember('memberNick') memberNick: string): Promise<string> {
 		console.log('Mutation: checkAuth');
 		console.log('memberNick', memberNick);
 		return `hi ${memberNick}`;
+
+		return this.memberService.updateMember();
+	}
+
+	@Roles(MemberType.USER, MemberType.AGENT)
+	@UseGuards(RolesGuard)
+	@Query(() => String)
+	public async checkAuthRoles(@AuthMember() authMember: Member): Promise<string> {
+		console.log('Mutation: checkAuthRoles');
+		return `hi ${authMember.memberNick}, you are ${authMember.memberType} (memberId: ${authMember._id})`;
 
 		return this.memberService.updateMember();
 	}
@@ -64,6 +76,8 @@ export class MemberResolver {
 	/* Admin */
 
 	//Authorization:ADMIN
+	@Roles(MemberType.ADMIN)
+	@UseGuards(RolesGuard)
 	@Mutation(() => String)
 	public async getAllMembersByAdmin(): Promise<string> {
 		console.log('Mutation: getAllMembersByAdmin');

@@ -14,5 +14,5 @@ export enum Message {
 	USED_NICK_PHONE = 'Nick or phone is already used!',
 	NOT_AUTHENTICATED = 'Please login first!',
 	TOKEN_NOT_EXIST = 'token is not exist',
-	ONLY_SPECIFIC_ROLES_ALLOWED = 'ONLY_SPECIFIC_ROLES_ALLOWED',
+	ONLY_SPECIFIC_ROLES_ALLOWED = 'Allowed only for members with specific roles',
 }
