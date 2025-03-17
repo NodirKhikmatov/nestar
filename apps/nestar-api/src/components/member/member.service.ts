@@ -6,6 +6,8 @@ import { MemberInput, LoginInput } from '../../libs/dto/member.input';
 import { Message } from '../../libs/enums/common.enum';
 import { MemberStatus } from '../../libs/enums/member.enum';
 import { AuthService } from '../auth/auth.service';
+import { ObjectId } from 'bson';
+import { MemberUpdate } from '../../libs/dto/member.update';
 
 @Injectable()
 export class MemberService {
@@ -51,8 +53,23 @@ export class MemberService {
 		return response;
 	}
 
-	public async updateMember(): Promise<string> {
-		return 'updateMember executed';
+	public async updateMember(memberId: ObjectId, input: MemberUpdate): Promise<Member> {
+		const result: Member = await this.memberModel
+			.findOneAndUpdate(
+				{
+					_id: memberId,
+					memberStatus: MemberStatus.ACTIVE,
+				},
+				input,
+				{ new: true },
+			)
+			.exec();
+
+		if (!result) throw new InternalServerErrorException(Message.UPLOAD_FAILED);
+
+		result.accessToken = await this.authService.createToken(result);
+
+		return result;
 	}
 
 	public async getMember(): Promise<string> {

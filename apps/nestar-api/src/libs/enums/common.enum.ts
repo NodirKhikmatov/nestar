@@ -4,6 +4,7 @@ export enum Message {
 	NO_DATA_FOUND = 'no data is found',
 	CREATE_FAILED = 'create is failed',
 	UPDATE_FAILED = 'update is failed',
+	UPLOAD_FAILED = 'upload is failed',
 
 	USED_MEMBER_NICK_OR_PHONE = 'Already used member nick or phone',
 	NO_MEMBER_NICK = 'No member with that member nick!',
