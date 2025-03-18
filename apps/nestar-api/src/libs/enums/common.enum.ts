@@ -1,3 +1,4 @@
+import { registerEnumType } from '@nestjs/graphql';
 /* eslint-disable prettier/prettier */
 export enum Message {
 	SOMETHING_WENT_WRONG = 'Something went wrong',
@@ -17,3 +18,12 @@ export enum Message {
 	TOKEN_NOT_EXIST = 'token is not exist',
 	ONLY_SPECIFIC_ROLES_ALLOWED = 'Allowed only for members with specific roles',
 }
+
+export enum Direction {
+	ASC = 1,
+	DESC = -1,
+}
+
+registerEnumType(Direction, {
+	name: 'Direction',
+});
