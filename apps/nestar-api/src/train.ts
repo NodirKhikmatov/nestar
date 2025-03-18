@@ -1,3 +1,43 @@
+/*TASK-ZO:
+
+Shunday function yozing, u parametrdagi string ichidagi qavslar miqdori balansda ekanligini aniqlasin. Ya'ni ochish("(") va yopish(")") qavslar soni bir xil bolishi kerak.
+MASALAN: areParenthesesBalanced("string()ichida(qavslar)soni()balansda") return true */
+
+
+function areParenthesesBalanced(s: string): boolean {
+    let count = 0;
+    for (const char of s) {
+        if (char === "(") count++;
+        else if (char === ")" && --count < 0) return false;
+    }
+    return count === 0;
+}
+
+
+console.log(areParenthesesBalanced("string()ichida(qavslar)soni()balansda"));  // true
+console.log(areParenthesesBalanced("(balans)emas)"));  // false
+
+
+
+
+
+
+/* TASK-ZN:
+
+Shunday function yozing, uni array va number parametri bolsin. Ikkinchi parametrda berilgan raqamli indexgacha arrayni orqasiga ogirib qaytarsin.
+MASALAN: rotateArray([1, 2, 3, 4, 5, 6], 3) return [5, 6, 1, 2, 3, 4]
+
+
+function rotateArray<T>(arr: T[], index: number): T[] {
+    if (index < 0 || index >= arr.length) {
+        throw new Error("Index out of bounds");
+    }
+    return [...arr.slice(-index), ...arr.slice(0, -index)];
+}
+
+
+console.log(rotateArray([1, 2, 3, 4, 5, 6], 3))
+;*/
 /**TASK ZM:
 
 Shunday function yozing, va bu function parametr
@@ -7,7 +47,7 @@ raqamlarni orqasiga o'girib qaytarsin
 MASALAN: reverseInteger(123456789); return 987654321;
 
 Yuqoridagi misolda, function kiritilgan raqamlarni orqasiga
-o'girib (reverse) qilib qaytarmoqda. */
+o'girib (reverse) qilib qaytarmoqda.
 function reverseInteger(num) {
     return Math.sign(num) * parseInt(num.toString().split('').reverse().join(''));
 }
@@ -18,8 +58,7 @@ console.log(reverseInteger(-98765));
 
 
 
-
-
+ */
 
 /*TASK-ZL:
 
@@ -36,7 +75,6 @@ function stringToKebab(str: string): string {
 // Test
 console.log(stringToKebab("I love Kebab")); 
 */
-
 
 /**TASK-ZK:
 
