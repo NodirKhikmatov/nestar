@@ -1,7 +1,22 @@
+/*TASK-ZP:
+
+Shunday function yozing, u parametridagi string ichidagi raqam va sonlarni sonini sanasin.
+MASALAN: countNumberAndLetters(“string152%\¥”) return {number:3, letter:6} */
+
+function countNumberAndLetters(input: string): { number: number; letter: number } {
+    let numberCount = (input.match(/[0-9]/g) || []).length;
+    let letterCount = (input.match(/[a-zA-Z]/g) || []).length;
+
+    return { number: numberCount, letter: letterCount };
+}
+
+console.log(countNumberAndLetters("string152%¥")); // Output: { number: 3, letter: 6 }
+
+
 /*TASK-ZO:
 
 Shunday function yozing, u parametrdagi string ichidagi qavslar miqdori balansda ekanligini aniqlasin. Ya'ni ochish("(") va yopish(")") qavslar soni bir xil bolishi kerak.
-MASALAN: areParenthesesBalanced("string()ichida(qavslar)soni()balansda") return true */
+MASALAN: areParenthesesBalanced("string()ichida(qavslar)soni()balansda") return true 
 
 
 function areParenthesesBalanced(s: string): boolean {
@@ -13,14 +28,10 @@ function areParenthesesBalanced(s: string): boolean {
     return count === 0;
 }
 
-
 console.log(areParenthesesBalanced("string()ichida(qavslar)soni()balansda"));  // true
 console.log(areParenthesesBalanced("(balans)emas)"));  // false
 
-
-
-
-
+*/
 
 /* TASK-ZN:
 
