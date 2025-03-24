@@ -6,7 +6,7 @@ import { MemberInput, LoginInput, AgentsInquiry, MembersInquiry } from '../../li
 import { Message, Direction } from '../../libs/enums/common.enum';
 import { MemberStatus, MemberType } from '../../libs/enums/member.enum';
 import { AuthService } from '../auth/auth.service';
-import { ObjectId } from 'bson';
+import { ObjectId } from 'mongoose';
 import { ViewService } from '../view/view.service';
 import { MemberUpdate } from '../../libs/dto/member/member.update';
 import { ViewGroup } from '../../libs/enums/view.enum';
@@ -67,7 +67,6 @@ export class MemberService {
 				input,
 				{ new: true },
 			)
-			.lean()
 			.exec();
 
 		if (!result) throw new InternalServerErrorException(Message.UPDATE_FAILED);
@@ -77,7 +76,7 @@ export class MemberService {
 		return result;
 	}
 
-	public async getMember(targetId: ObjectId, memberId: ObjectId): Promise<Member> {
+	public async getMember(memberId: ObjectId, targetId: ObjectId): Promise<Member> {
 		const search: T = {
 			_id: targetId,
 			memberStatus: {
@@ -85,7 +84,7 @@ export class MemberService {
 			},
 		};
 
-		const targetMember = await this.memberModel.findOne(search).exec();
+		const targetMember = await this.memberModel.findOne(search).lean().exec();
 		if (!targetMember) throw new InternalServerErrorException(Message.NO_DATA_FOUND);
 
 		if (memberId) {
@@ -110,19 +109,18 @@ export class MemberService {
 		if (text) match.memberNick = { $regex: new RegExp(text, '1') };
 		console.log('match', match);
 
-		const result = await this.memberModel
-			.aggregate([
-				{ $match: match },
-				{ $sort: sort },
-				{
-					$facet: {
-						list: [{ $skip: (input.page - 1) * input.limit }, { $limit: input.limit }],
+		const result = await this.memberModel.aggregate([
+			{ $match: match },
+			{ $sort: sort },
+			{
+				$facet: {
+					list: [{ $skip: (input.page - 1) * input.limit }, { $limit: input.limit }],
 
-						metaCounter: [{ $count: 'total' }],
-					},
+					metaCounter: [{ $count: 'total' }],
 				},
-			])
-			.exec();
+			},
+		]);
+		// .exec();
 		console.log('result:', result);
 		if (!result.length) throw new InternalServerErrorException(Message.NO_DATA_FOUND);
 
@@ -165,7 +163,6 @@ export class MemberService {
 	}
 
 	public async memberStateEditor(input: StatisticModifier): Promise<Member> {
-
 		const { _id, targetKey, modifier } = input;
 		return await this.memberModel.findOneAndUpdate(_id, { $inc: { [targetKey]: modifier } }, { new: true }).exec();
 	}
