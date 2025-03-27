@@ -5,7 +5,12 @@ import { MemberType } from '../../libs/enums/member.enum';
 import { UseGuards } from '@nestjs/common';
 import { RolesGuard } from '../auth/guards/roles.guard';
 import { Property, Properties } from '../../libs/dto/property/property';
-import { PropertyInput, PropertiesInquiry, AgentPropertiesInquiry, AllPropertiesInquiry } from '../../libs/dto/property/property.input';
+import {
+	PropertyInput,
+	PropertiesInquiry,
+	AgentPropertiesInquiry,
+	AllPropertiesInquiry,
+} from '../../libs/dto/property/property.input';
 import { AuthMember } from '../auth/decorators/authMember.decorator';
 import { ObjectId } from 'mongoose';
 import { shapeIntoMongoDbObjectId } from '../../libs/config';
@@ -86,7 +91,22 @@ export class PropertyResolver {
 		@AuthMember('_id') memberId: ObjectId,
 	): Promise<Properties> {
 		console.log('Mutation: getAllPropertiesByAdmin');
-		return await this.propertyService.getAllPropertiesByAdmin( input);
+		return await this.propertyService.getAllPropertiesByAdmin(input);
 	}
 
+	@Roles(MemberType.ADMIN)
+	@UseGuards(RolesGuard)
+	@Mutation((returns) => Property)
+	public async updatePropertyByAdmin(
+		@Args('input') input: PropertyUpdate,
+		@AuthMember('_id') memberId: ObjectId,
+	): Promise<Property> {
+		console.log(input);
+
+		console.log('Mutation: updatePropertyByAdmin');
+		input._id = shapeIntoMongoDbObjectId(input._id);
+		console.log(input._id);
+
+		return await this.propertyService.updatePropertyByAdmin(input);
+	}
 }
