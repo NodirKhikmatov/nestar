@@ -1,7 +1,32 @@
+/*TASK-ZQ:
+
+Shunday function yozing, u parametridagi array ichida 2 marta qaytarilgan sonlarni alohida araryda qaytarsin.
+MASALAN: findDuplicates([1,2,3,4,5,4,3,4]) return [3, 4] */
+
+function findDuplicates(arr: number[]): number[] {
+	const countMap = arr.reduce((acc, num) => ((acc[num] = (acc[num] || 0) + 1), acc), {} as Record<number, number>);
+	return Object.keys(countMap)
+		.filter((key) => countMap[+key] === 2)
+		.map(Number);
+}
+
+console.log(findDuplicates([1, 2, 3, 4, 5,  3]));
+
+
+
+
+
+
+
+
+
+
+
+
 /*TASK-ZP:
 
 Shunday function yozing, u parametridagi string ichidagi raqam va sonlarni sonini sanasin.
-MASALAN: countNumberAndLetters(“string152%\¥”) return {number:3, letter:6} */
+MASALAN: countNumberAndLetters(“string152%\¥”) return {number:3, letter:6} 
 
 function countNumberAndLetters(input: string): { number: number; letter: number } {
     let numberCount = (input.match(/[0-9]/g) || []).length;
@@ -12,7 +37,7 @@ function countNumberAndLetters(input: string): { number: number; letter: number 
 
 console.log(countNumberAndLetters("string152%¥")); // Output: { number: 3, letter: 6 }
 
-
+*/
 /*TASK-ZO:
 
 Shunday function yozing, u parametrdagi string ichidagi qavslar miqdori balansda ekanligini aniqlasin. Ya'ni ochish("(") va yopish(")") qavslar soni bir xil bolishi kerak.
