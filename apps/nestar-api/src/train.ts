@@ -1,7 +1,42 @@
+/*TASK-ZR:
+
+Shunday function yozing, u parametridagi string ichidagi raqam va sonlarni sonini sanasin.
+MASALAN: countNumberAndLetters(“string152%\¥”) return {number:3, letter:6} */
+
+
+function countNumberAndLetters(input: string): { number: number; letter: number } {
+    let numberCount = (input.match(/[0-9]/g) || []).length;
+    let letterCount = (input.match(/[a-zA-Z]/g) || []).length;
+
+    return { number: numberCount, letter: letterCount };
+}
+
+console.log(countNumberAndLetters("string152%¥")); // Output: { number: 3, letter: 6 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /*TASK-ZQ:
 
 Shunday function yozing, u parametridagi array ichida 2 marta qaytarilgan sonlarni alohida araryda qaytarsin.
-MASALAN: findDuplicates([1,2,3,4,5,4,3,4]) return [3, 4] */
+MASALAN: findDuplicates([1,2,3,4,5,4,3,4]) return [3, 4] 
 
 function findDuplicates(arr: number[]): number[] {
 	const countMap = arr.reduce((acc, num) => ((acc[num] = (acc[num] || 0) + 1), acc), {} as Record<number, number>);
@@ -15,7 +50,7 @@ console.log(findDuplicates([1, 2, 3, 4, 5,  3]));
 
 
 
-
+*/
 
 
 
