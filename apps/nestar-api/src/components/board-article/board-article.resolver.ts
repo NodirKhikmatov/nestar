@@ -16,10 +16,14 @@ import { BoardArticleUpdate } from '../../libs/dto/board-article/board-article.u
 import { RolesGuard } from '../auth/guards/roles.guard';
 import { MemberType } from '../../libs/enums/member.enum';
 import { Roles } from '../auth/decorators/roles.decorator';
+import { LikeService } from '../like/like.service';
 
 @Resolver()
 export class BoardArticleResolver {
-	constructor(private readonly boardArticleService: BoardArticleService) {}
+	constructor(
+		private readonly boardArticleService: BoardArticleService,
+		private readonly likeService: LikeService,
+	) {}
 
 	@UseGuards(AuthGuard)
 	@Mutation(() => BoardArticle)
@@ -62,6 +66,18 @@ export class BoardArticleResolver {
 	): Promise<BoardArticles> {
 		console.log('Mutation: getBoardArticles');
 		return await this.boardArticleService.getBoardArticles(memberId, input);
+	}
+
+	//likes
+	@UseGuards(AuthGuard)
+	@Mutation(() => BoardArticle)
+	public async likeTargetBoardArticle(
+		@Args('articleId') input: string,
+		@AuthMember('_id') memberId: ObjectId,
+	): Promise<BoardArticle> {
+		console.log('Mutation: likeTargetBoardArticle');
+		const likeRefId = shapeIntoMongoDbObjectId(input);
+		return await this.boardArticleService.likeTargetBoardArticle(memberId, likeRefId);
 	}
 
 	/*admin */
