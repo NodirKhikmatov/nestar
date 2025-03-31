@@ -1,7 +1,21 @@
+/**TASK-ZS:
+
+Shunday function yozing, u parametridagi arrayni ichidagi 1 marta kelgan elemnetni qaytarsin.
+MASALAN: singleNumber([4, 2, 1, 2, 1]) return */
+
+
+function singleNumber(nums: number[]): number {
+    return nums.reduce((acc, num) => acc ^ num, 0);
+}
+
+
+console.log(singleNumber([4, 2, 1, 2, 1])); // Output: 4
+
+
 /*TASK-ZR:
 
 Shunday function yozing, u parametridagi string ichidagi raqam va sonlarni sonini sanasin.
-MASALAN: countNumberAndLetters(“string152%\¥”) return {number:3, letter:6} */
+MASALAN: countNumberAndLetters(“string152%\¥”) return {number:3, letter:6} 
 
 
 function countNumberAndLetters(input: string): { number: number; letter: number } {
@@ -13,21 +27,7 @@ function countNumberAndLetters(input: string): { number: number; letter: number 
 
 console.log(countNumberAndLetters("string152%¥")); // Output: { number: 3, letter: 6 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+*/
 
 
 
