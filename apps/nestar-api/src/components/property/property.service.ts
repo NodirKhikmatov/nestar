@@ -20,6 +20,7 @@ import { lookupMember, shapeIntoMongoDbObjectId, lookUpAuthMemberLiked } from '.
 import { LikeInput } from '../../libs/dto/like/like.input';
 import { LikeGroup } from '../../libs/enums/like.enum';
 import { LikeService } from '../like/like.service';
+import { OrdinaryInquiry } from '../../libs/dto/property/property.input';
 
 @Injectable()
 export class PropertyService {
@@ -63,7 +64,6 @@ export class PropertyService {
 			// meLiked
 			const likeInput = { memberId: memberId, likeRefId: propertyId, likeGroup: LikeGroup.PROPERTY };
 			targetProperty.meLiked = await this.likeService.checkLikeExistence(likeInput);
-
 		}
 		targetProperty.memberData = await this.memberService.getMember(null, targetProperty.memberId);
 		return targetProperty;
@@ -152,6 +152,10 @@ export class PropertyService {
 				return { [ele]: true };
 			});
 		}
+	}
+
+	public async getFavorites(memberId: ObjectId, input: OrdinaryInquiry): Promise<Properties> {
+		return await this.likeService.getFavoriteProperties(memberId, input);
 	}
 
 	public async getAgentProperties(memberId: ObjectId, input: AgentPropertiesInquiry): Promise<Properties> {

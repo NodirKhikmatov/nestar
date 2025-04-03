@@ -18,6 +18,7 @@ import { WithoutGuard } from '../auth/guards/without.guard';
 import { PropertyUpdate } from '../../libs/dto/property/property.update';
 import { LikeService } from '../like/like.service';
 import { AuthGuard } from '../auth/guards/auth.guard';
+import { OrdinaryInquiry } from '../../libs/dto/property/property.input';
 
 @Resolver()
 export class PropertyResolver {
@@ -76,6 +77,16 @@ export class PropertyResolver {
 		return await this.propertyService.getProperties(memberId, input);
 	}
 
+	@UseGuards(AuthGuard)
+	@Query(() => Properties)
+	public async getFavorites(
+		@Args('input') input: OrdinaryInquiry,
+		@AuthMember('_id') memberId: ObjectId,
+	): Promise<Properties> {
+		console.log('Mutation: getFavorites');
+		return await this.propertyService.getFavorites(memberId, input);
+	}
+
 	@Roles(MemberType.AGENT)
 	@UseGuards(RolesGuard)
 	@Query((returns) => Properties)
@@ -130,7 +141,6 @@ export class PropertyResolver {
 	public async removePropertyByAdmin(@Args('propertyId') input: string): Promise<Property> {
 		console.log('Mutation: removePropertyByAdmin');
 		const propertyId = shapeIntoMongoDbObjectId(input);
-
 		return await this.propertyService.removePropertyByAdmin(propertyId);
 	}
 }
