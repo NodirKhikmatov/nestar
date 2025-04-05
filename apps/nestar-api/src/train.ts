@@ -1,7 +1,15 @@
+/*TASK-ZT:
+
+Shunday function yozing, u parametridagi string ichida 1 martadan ortiq qaytarilmagan birinchi harf indeksini qaytarsin.
+MASALAN: firstUniqueCharIndex(“stamp”) return 0 */
+
+const firstUniqueCharIndex = (s: string): number => [...s].findIndex((c) => s.indexOf(c) === s.lastIndexOf(c));
+console.log(firstUniqueCharIndex('stamp'));
+
 /**TASK-ZS:
 
 Shunday function yozing, u parametridagi arrayni ichidagi 1 marta kelgan elemnetni qaytarsin.
-MASALAN: singleNumber([4, 2, 1, 2, 1]) return */
+MASALAN: singleNumber([4, 2, 1, 2, 1]) return 
 
 
 function singleNumber(nums: number[]): number {
@@ -11,7 +19,7 @@ function singleNumber(nums: number[]): number {
 
 console.log(singleNumber([4, 2, 1, 2, 1])); // Output: 4
 
-
+*/
 /*TASK-ZR:
 
 Shunday function yozing, u parametridagi string ichidagi raqam va sonlarni sonini sanasin.
@@ -28,10 +36,6 @@ function countNumberAndLetters(input: string): { number: number; letter: number 
 console.log(countNumberAndLetters("string152%¥")); // Output: { number: 3, letter: 6 }
 
 */
-
-
-
-
 
 /*TASK-ZQ:
 
@@ -51,12 +55,6 @@ console.log(findDuplicates([1, 2, 3, 4, 5,  3]));
 
 
 */
-
-
-
-
-
-
 
 /*TASK-ZP:
 
