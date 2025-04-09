@@ -5,4 +5,16 @@ export class BatchService {
 	getHello(): string {
 		return 'welcome nester-batch server';
 	}
+
+	public async batchRollback(): Promise<void> {
+		console.log('batchRollback');
+	}
+
+	public async batchProperties(): Promise<void> {
+		console.log('batchRollback');
+	}
+
+	public async batchAgents(): Promise<void> {
+		console.log('batchRollback');
+	}
 }
