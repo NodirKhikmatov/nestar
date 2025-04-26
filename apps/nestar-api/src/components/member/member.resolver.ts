@@ -21,6 +21,12 @@ export class MemberResolver {
 	constructor(private readonly memberService: MemberService) {}
 
 	@Mutation(() => Member)
+	public async signup(@Args('input') input: MemberInput): Promise<Member> {
+		console.log('Mutation signup');
+		return await this.memberService.signup(input);
+	}
+
+	@Mutation(() => Member)
 	public async login(@Args('input') input: LoginInput): Promise<Member> {
 		try {
 			console.log('Mutation: login');
