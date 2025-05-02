@@ -70,7 +70,7 @@ export class CommentService {
 			},
 			input,
 			{ new: true },
-		);
+		).exec()
 		if (!result) throw new InternalServerErrorException(Message.UPDATE_FAILED);
 		return result;
 	}
@@ -95,7 +95,7 @@ export class CommentService {
 					metaCounter: [{ $count: 'total' }],
 				},
 			},
-		]);
+		]).exec();
 
 		if (!result.length) throw new InternalServerErrorException(Message.NO_DATA_FOUND);
 
