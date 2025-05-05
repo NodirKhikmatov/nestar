@@ -108,7 +108,7 @@ if(this.messageList.length > 5) this.messageList.splice(0, this.messageList.leng
     const clientNick: string = authMember?.memberNick ?? 'Guest';
 
     this.logger.verbose(`NEW MESSAGE: [${clientNick}] ${payload}`);
-    this.emitMessage(newMessage);
+    this.emitMessage(newMessage);  
   }
 
   private broadcastMessage(sender: WebSocket, message: InfoPayLoad) {
